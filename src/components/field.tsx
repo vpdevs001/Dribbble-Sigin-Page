@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 12,
-    fontWeight: "600",
+    fontFamily: "Poppins-SemiBold",
     color: "#1E1E1E",
     marginLeft: 8,
   },

@@ -1,8 +1,8 @@
 import Button from "@/components/button";
 import Field from "@/components/field";
 import Header from "@/components/header";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -24,7 +24,7 @@ export default function Index() {
 
         <View style={styles.formContainer}>
           <Field
-            label={'Email Address'}
+            label={"Email Address"}
             placeholder="elementary221b@gmail.com"
             value={""}
             onChangeText={() => {}}
@@ -32,9 +32,9 @@ export default function Index() {
             iconName="mail-outline"
             focused={true}
           />
-          
+
           <Field
-            label={'Password'}
+            label={"Password"}
             placeholder="Enter your password..."
             value={""}
             onChangeText={() => {}}
@@ -42,11 +42,7 @@ export default function Index() {
             iconName="lock-closed-outline"
           />
 
-          <Button
-            text="Sign In"
-            onPress={() => {}}
-            disabled={false}
-          />
+          <Button text="Sign In" onPress={() => {}} disabled={false} />
         </View>
 
         <View style={styles.socialContainer}>
@@ -95,7 +91,7 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 20,
     marginBottom: 30,
-    marginTop: 40
+    marginTop: 40,
   },
   socialContainer: {
     flexDirection: "row",
@@ -124,15 +120,16 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: 14,
     color: "#666",
+    fontFamily: "Poppins-Regular",
   },
   footerLink: {
     fontSize: 14,
     color: "#8CC63F",
-    fontWeight: "600",
+    fontFamily: "Poppins-SemiBold",
   },
   forgotPassword: {
     fontSize: 14,
-    fontWeight: "600",
+    fontFamily: "Poppins-SemiBold",
     color: "#8CC63F",
   },
 });

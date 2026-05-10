@@ -1,6 +1,7 @@
+import { Pressable, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Colors } from "@/theme/colors";
 
 const Button = ({
   text,
@@ -11,9 +12,15 @@ const Button = ({
   onPress: () => void;
   disabled: boolean;
 }) => {
+  const theme = Colors.light;
+
   return (
     <View style={styles.container}>
-      <Pressable style={styles.button} onPress={onPress} disabled={disabled}>
+      <Pressable 
+        style={[styles.button, { backgroundColor: theme.primary, shadowColor: theme.primary }]} 
+        onPress={onPress} 
+        disabled={disabled}
+      >
         <Text style={styles.text}>{text}</Text>
         <Ionicons name="arrow-forward" size={20} color="#fff" />
       </Pressable>
@@ -30,7 +37,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   button: {
-    backgroundColor: "#8CC63F",
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderRadius: 30,
@@ -39,7 +45,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 8,
-    shadowColor: "#8CC63F",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,

@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Colors } from "@/theme/colors";
 
 interface FieldProps {
   placeholder: string;
@@ -9,7 +10,6 @@ interface FieldProps {
   security: boolean;
   iconName: keyof typeof Ionicons.glyphMap;
   label: string;
-  focused?: boolean;
 }
 
 const Field = ({
@@ -19,23 +19,31 @@ const Field = ({
   security,
   iconName,
   label,
-  focused
 }: FieldProps) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const theme = Colors.light;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <View style={[styles.inputContainer, focused && styles.inputContainerFocused]}>
-        <Ionicons name={iconName} size={20} color={focused ? "#8CC63F" : "#999"} />
+      <Text style={[styles.label, { color: theme.textPrimary }]}>{label}</Text>
+      <View style={[
+        styles.inputContainer,
+        { backgroundColor: theme.inputBackground, borderColor: theme.inputBorder },
+        isFocused && { borderColor: theme.inputBorderFocused }
+      ]}>
+        <Ionicons name={iconName} size={20} color={isFocused ? theme.primary : theme.inputIcon} />
         <TextInput
           secureTextEntry={security}
-          style={styles.input}
+          style={[styles.input, { color: theme.inputText }]}
           placeholder={placeholder}
           value={value}
           onChangeText={onChangeText}
-          placeholderTextColor="#999"
+          placeholderTextColor={theme.inputIcon}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
         {security && (
-          <Ionicons name="eye-off-outline" size={20} color="#999" />
+          <Ionicons name="eye-off-outline" size={20} color={theme.inputIcon} />
         )}
       </View>
     </View>
@@ -51,20 +59,14 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderRadius: 30,
-    backgroundColor: "#FFF",
     borderWidth: 1,
-    borderColor: "#E8E8E8",
     paddingHorizontal: 20,
     paddingVertical: 14,
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
   },
-  inputContainerFocused: {
-    borderColor: "#8CC63F",
-  },
   input: {
-    color: "#333",
     fontSize: 14,
     fontFamily: "Poppins-Medium",
     flex: 1,
@@ -72,7 +74,6 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 12,
     fontFamily: "Poppins-SemiBold",
-    color: "#1E1E1E",
     marginLeft: 8,
   },
 });

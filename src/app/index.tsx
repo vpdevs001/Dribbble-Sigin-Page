@@ -4,10 +4,18 @@ import Header from "@/components/header";
 import { Ionicons } from "@expo/vector-icons";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import { Colors } from "@/theme/colors";
 
 export default function Index() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const theme = Colors.light;
+
   return (
-    <SafeAreaProvider style={styles.safeArea}>
+    <SafeAreaProvider style={[styles.safeArea, { backgroundColor: theme.background }]}>
       <View style={styles.container}>
         <View style={styles.logoContainer}>
           <Image
@@ -26,18 +34,17 @@ export default function Index() {
           <Field
             label={"Email Address"}
             placeholder="elementary221b@gmail.com"
-            value={""}
-            onChangeText={() => {}}
+            value={email}
+            onChangeText={setEmail}
             security={false}
             iconName="mail-outline"
-            focused={true}
           />
 
           <Field
             label={"Password"}
             placeholder="Enter your password..."
-            value={""}
-            onChangeText={() => {}}
+            value={password}
+            onChangeText={setPassword}
             security={true}
             iconName="lock-closed-outline"
           />
@@ -46,26 +53,26 @@ export default function Index() {
         </View>
 
         <View style={styles.socialContainer}>
-          <Pressable style={styles.socialButton}>
-            <Ionicons name="logo-facebook" size={20} color="#1E1E1E" />
+          <Pressable style={[styles.socialButton, { backgroundColor: theme.cardBackground, borderColor: theme.cardBorder }]}>
+            <Ionicons name="logo-facebook" size={20} color={theme.textPrimary} />
           </Pressable>
-          <Pressable style={styles.socialButton}>
-            <Ionicons name="logo-google" size={20} color="#1E1E1E" />
+          <Pressable style={[styles.socialButton, { backgroundColor: theme.cardBackground, borderColor: theme.cardBorder }]}>
+            <Ionicons name="logo-google" size={20} color={theme.textPrimary} />
           </Pressable>
-          <Pressable style={styles.socialButton}>
-            <Ionicons name="logo-instagram" size={20} color="#1E1E1E" />
+          <Pressable style={[styles.socialButton, { backgroundColor: theme.cardBackground, borderColor: theme.cardBorder }]}>
+            <Ionicons name="logo-instagram" size={20} color={theme.textPrimary} />
           </Pressable>
         </View>
 
         <View style={styles.footerContainer}>
-          <Text style={styles.footerText}>Don't have an account? </Text>
-          <Pressable onPress={() => {}}>
-            <Text style={styles.footerLink}>Sign Up.</Text>
+          <Text style={[styles.footerText, { color: theme.textSecondary }]}>Don't have an account? </Text>
+          <Pressable onPress={() => router.push("/signup")}>
+            <Text style={[styles.footerLink, { color: theme.primary }]}>Sign Up.</Text>
           </Pressable>
         </View>
 
-        <Pressable onPress={() => {}}>
-          <Text style={styles.forgotPassword}>Forgot your password?</Text>
+        <Pressable onPress={() => router.push("/forgotPassword")}>
+          <Text style={[styles.forgotPassword, { color: theme.primary }]}>Forgot your password?</Text>
         </Pressable>
       </View>
     </SafeAreaProvider>
@@ -75,7 +82,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#FAFAFA",
   },
   container: {
     flex: 1,
@@ -102,9 +108,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 20,
-    backgroundColor: "#FFF",
     borderWidth: 1,
-    borderColor: "#E8E8E8",
     alignItems: "center",
     justifyContent: "center",
     shadowColor: "#000",
@@ -119,17 +123,14 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 14,
-    color: "#666",
     fontFamily: "Poppins-Regular",
   },
   footerLink: {
     fontSize: 14,
-    color: "#8CC63F",
     fontFamily: "Poppins-SemiBold",
   },
   forgotPassword: {
     fontSize: 14,
     fontFamily: "Poppins-SemiBold",
-    color: "#8CC63F",
   },
 });
